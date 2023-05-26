@@ -6,7 +6,7 @@ const usersRoutes = require('./src/routes/usersRoutes');
 const goalsRoutes = require('./src/routes/goalsRoutes');
 const habitRoutes = require('./src/routes/habitsRoutes');
 // const frequencyRoutes = require('./routes/frequencyRoutes');
-// const checklistRoutes = require('./routes/checklistRoutes');
+const checklistRoutes = require('./src/routes/checklistRoutes');
 // const progressRoutes = require('./routes/progressRoutes');
 // const pointRoutes = require('./routes/pointRoutes');
 

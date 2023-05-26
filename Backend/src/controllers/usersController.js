@@ -1,5 +1,6 @@
 const {pool} = require('../config/config');
 const {v4: uuidv4} = require('uuid');
+const {generateToken} = require('../middleware/authMiddleware');
 const bcrypt = require('bcrypt');
 
 // Controller function to create a new user
@@ -61,7 +62,9 @@ const loginUser = async (req, res) => {
 
       if (match) {
         // Passwords match, user is authenticated
-        res.json(user);
+        const token = generateToken(email);
+
+        res.json({user, token});
       } else {
         // Passwords don't match
         res.status(401).json({error: 'Invalid credentials'});
