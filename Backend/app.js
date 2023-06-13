@@ -6,7 +6,7 @@ const usersRoutes = require('./src/routes/usersRoutes');
 const goalsRoutes = require('./src/routes/goalsRoutes');
 const habitRoutes = require('./src/routes/habitsRoutes');
 // const frequencyRoutes = require('./routes/frequencyRoutes');
-const checklistRoutes = require('./src/routes/checklistRoutes');
+// const checklistRoutes = require('./src/routes/checklistRoutes');
 // const progressRoutes = require('./routes/progressRoutes');
 // const pointRoutes = require('./routes/pointRoutes');
 
@@ -26,9 +26,15 @@ app.use('/habits', habitRoutes);
 // app.use('/progress', progressRoutes);
 // app.use('/points', pointRoutes);
 
-testDatabaseConnection();
+// testDatabaseConnection();
 // Start the server
-const PORT = process.env.PORT || 3000;
+
+// create /test route to test server
+app.get('/test', (req, res) => {
+  res.send('Server is working. Please post at "/users" to create a user.');
+});
+
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
