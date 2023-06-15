@@ -26,7 +26,7 @@ app.use('/habits', habitRoutes);
 // app.use('/progress', progressRoutes);
 // app.use('/points', pointRoutes);
 
-// testDatabaseConnection();
+testDatabaseConnection();
 // Start the server
 
 // create /test route to test server

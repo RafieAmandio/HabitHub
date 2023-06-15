@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary"
+    tools:context=".Register">
+
+
+    <ImageView
+        android:id="@+id/register_imageview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/register_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="90dp"
+        android:fontFamily="@font/nunitoextrabold"
+        android:text="Register"
+        android:textColor="@color/white"
+        android:textSize="36sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <!--Text Selamat Datang-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/nunitosemibold"
+        android:text="Buat Akun Untuk Memulai"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="-200dp"
+        android:background="@drawable/rounded_layout"
+        android:padding="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/register_imageview">
+
+        <EditText
+            android:id="@+id/register_editname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:backgroundTint="@color/placeholder"
+            android:drawableStart="@drawable/profile_logo"
+            android:drawablePadding="12dp"
+            android:fontFamily="@font/nunitosemibold"
+            android:hint="Username"
+            android:textColor="@color/placeholder"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <!--Edit Text Email-->
+        <EditText
+            android:id="@+id/register_editemail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/placeholder"
+            android:drawableStart="@drawable/email_logo"
+            android:drawablePadding="12dp"
+            android:fontFamily="@font/nunitosemibold"
+            android:hint="Email"
+            android:textColor="@color/placeholder"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/register_editname" />
+
+        <EditText
+            android:id="@+id/register_editpassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/placeholder"
+            android:drawableStart="@drawable/password_logo"
+            android:drawablePadding="12dp"
+            android:fontFamily="@font/nunitosemibold"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:textColor="@color/placeholder"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/register_editemail" />
+
+        <EditText
+            android:id="@+id/register_confeditpassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/placeholder"
+            android:drawableStart="@drawable/password_logo"
+            android:drawablePadding="12dp"
+            android:fontFamily="@font/nunitosemibold"
+            android:hint="Re-enter your password"
+            android:inputType="textPassword"
+            android:textColor="@color/placeholder"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/register_editpassword" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/register_button"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="@font/nunitoextrabold"
+            android:text="Masuk"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/register_confeditpassword" />
+
+        <TextView
+            android:id="@+id/register_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:fontFamily="@font/nunitoregular"
+            android:text="@string/register_daftar"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toBottomOf="@+id/register_button" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
