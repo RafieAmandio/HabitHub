@@ -7,6 +7,9 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public class BaseApiService {
-
+    @GET("account/{id}")
+    Call<String> getAccount() {
+        return null;
+    }
 
 }

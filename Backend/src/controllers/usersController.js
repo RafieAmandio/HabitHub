@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt');
 // Controller function to create a new user
 const registerUser = async (req, res) => {
   try {
+    console.log("Register User : \n" + req.body);
     const {username, email, password, gender} = req.body;
 
     const emailCheckQuery = {
