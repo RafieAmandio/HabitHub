@@ -6,5 +6,10 @@ public class User {
     private String email;
     private String password;
     private String gender;
+
+    public String getUserId() {
+        return userid;
+    }
+
 }
 

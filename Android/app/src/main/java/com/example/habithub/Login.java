@@ -59,8 +59,6 @@ public class Login extends AppCompatActivity {
 
         // create button to handle register
         btnRegister.setOnClickListener(v -> {
-            // TODO Create Register Logic
-
             Intent intent = new Intent(this, Register.class);
             startActivity(intent);
         });

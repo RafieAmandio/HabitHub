@@ -1,7 +1,10 @@
 package com.example.habithub.request;
 
+import com.example.habithub.model.Goals;
 import com.example.habithub.model.LoginResponse;
 import com.example.habithub.model.User;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -30,9 +33,10 @@ public interface BaseApiService {
     );
 
     @GET("goals/user/{userid}")
-    Call<User> getUser(
+    Call<ArrayList<Goals>> getGoalsByUserId(
             @Path("userid") String userid
     );
+
 
 
 }
