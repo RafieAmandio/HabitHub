@@ -5,6 +5,7 @@ const {v4: uuidv4} = require('uuid');
 const getAllGoalsByUserId = async (req, res) => {
   try {
     const {userid} = req.params;
+    console.log(userid);
     const query = {
       text: 'SELECT * FROM goals WHERE userid = $1',
       values: [userid],
