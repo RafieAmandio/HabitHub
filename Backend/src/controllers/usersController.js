@@ -1,6 +1,5 @@
 const {pool} = require('../config/config');
 const {v4: uuidv4} = require('uuid');
-const {generateToken} = require('../middleware/authMiddleware');
 const bcrypt = require('bcrypt');
 
 // Controller function to create a new user
@@ -62,9 +61,7 @@ const loginUser = async (req, res) => {
       const match = await bcrypt.compare(password, user.password);
 
       if (match) {
-        // Passwords match, user is authenticated
-        const token = generateToken(email);
-
+        const token = jwt.sign({ user }, config.TOKEN_KEY, { expiresIn: '24h' });
         res.json({user, token});
       } else {
         // Passwords don't match
