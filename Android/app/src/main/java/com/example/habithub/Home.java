@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -38,7 +39,11 @@ public class Home extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.home_listView);
 
+        //create toast to print login user id
+        // Toast.makeText(mContext, Login.user.getUserId(), Toast.LENGTH_SHORT).show();
         getGoals();
+
+
 
     }
 
@@ -50,7 +55,10 @@ public class Home extends AppCompatActivity {
                 try {
                     if (response.isSuccessful()) {
 
+                        Toast.makeText(mContext, response.body().toString(), Toast.LENGTH_SHORT).show();
                         ArrayList<Goals> goalsList = response.body();
+                        Log.d("Response", goalsList.toString());
+
 
                         ArrayList<String> goalNamesList = new ArrayList<>();
 
@@ -59,8 +67,6 @@ public class Home extends AppCompatActivity {
                             String goalName = goal.getGoalName();
                             goalNamesList.add(goalName);
                         }
-                        // print the goalNamesList to the toast
-                        Toast.makeText(mContext, goalNamesList.toString(), Toast.LENGTH_SHORT).show();
 
                         System.out.println(goalNamesList);
 

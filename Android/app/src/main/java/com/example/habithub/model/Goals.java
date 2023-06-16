@@ -1,21 +1,27 @@
 package com.example.habithub.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 public class Goals {
-    private String goalId;
-    private String userId;
-    private String goalName;
-    private String description;
-    private Date targetDate;
 
-    public Goals(String goalId, String userId, String goalName, String description, Date targetDate) {
-        this.goalId = goalId;
-        this.userId = userId;
-        this.goalName = goalName;
-        this.description = description;
-        this.targetDate = targetDate;
-    }
+    @SerializedName("goalid")
+    private String goalId;
+
+    @SerializedName("userid")
+    private String userId;
+
+    @SerializedName("goalname")
+    private String goalName;
+
+    @SerializedName("description")
+    private String description;
+
+    @SerializedName("targetdate")
+    private String targetDate;
+
+    // Getters and Setters
 
     public String getGoalId() {
         return goalId;
@@ -49,11 +55,22 @@ public class Goals {
         this.description = description;
     }
 
-    public Date getTargetDate() {
+    public String getTargetDate() {
         return targetDate;
     }
 
-    public void setTargetDate(Date targetDate) {
+    public void setTargetDate(String targetDate) {
         this.targetDate = targetDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Goals{" +
+                "goalId='" + goalId + '\'' +
+                ", userId='" + userId + '\'' +
+                ", goalName='" + goalName + '\'' +
+                ", description='" + description + '\'' +
+                ", targetDate='" + targetDate + '\'' +
+                '}';
     }
 }

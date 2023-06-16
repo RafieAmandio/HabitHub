@@ -33,7 +33,7 @@ public interface BaseApiService {
     );
 
     @FormUrlEncoded
-    @GET("goals/user")
+    @POST("goals/user")
     Call<ArrayList<Goals>> getGoalsByUserId(
             @Field("userid") String userid
     );

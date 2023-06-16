@@ -1,5 +1,6 @@
 const express = require('express');
 const goalsController = require('../controllers/goalsController');
+const verifyToken = require('../middleware/authMiddleware');
 
 const router = express.Router();
 
@@ -7,7 +8,7 @@ const router = express.Router();
 router.get('/', goalsController.getAllGoals);
 
 // Route to get all goals by userid
-router.post('/user', goalsController.getAllGoalsByUserId);
+router.post('/user',verifyToken, goalsController.getAllGoalsByUserId);
 
 // Route to get a goal by goalid
 router.get('/goalid/:goalid', goalsController.getGoalById);

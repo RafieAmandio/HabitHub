@@ -1,27 +1,21 @@
 const jwt = require('jsonwebtoken');
 
-// Authentication middleware function
-const authenticate = (req, res, next) => {
-  // Check if the request contains a token in the headers or query string
-  const token = req.headers.authorization || req.query.token;
+const config = process.env;
 
-  // Verify and decode the token
-  try {
-    const decoded = jwt.verify(token, 'denise'); // Replace 'your-secret-key' with your actual secret key
-    req.user = decoded;
-    next();
-  } catch (error) {
-    return res.status(401).json({error: 'Authentication failed'});
+const verifyToken = (req, res, next) => {
+  const token =
+    req.body.token || req.query.token || req.headers['x-access-token'];
+
+  if (!token) {
+    return res.status(403).send('A token is required for authentication');
   }
+  try {
+    const decoded = jwt.verify(token, config.TOKEN_KEY);
+    req.user = decoded;
+  } catch (err) {
+    return res.status(401).send('Invalid Token');
+  }
+  return next();
 };
 
-const generateToken = (email) => {
-  const secretKey = 'denise'; // Replace 'your-secret-key' with your actual secret key
-  const token = jwt.sign({email}, secretKey, {expiresIn: '1h'});
-  return token;
-};
-
-module.exports = {
-  authenticate,
-  generateToken,
-};
+module.exports = verifyToken;
