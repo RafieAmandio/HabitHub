@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.habithub.model.Goals;
 import com.example.habithub.request.BaseApiService;
@@ -37,6 +38,7 @@ public class Home extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.home_listView);
 
+        getGoals();
 
     }
 
@@ -47,6 +49,7 @@ public class Home extends AppCompatActivity {
             public void onResponse(Call<ArrayList<Goals>> call, Response<ArrayList<Goals>> response) {
                 try {
                     if (response.isSuccessful()) {
+
                         ArrayList<Goals> goalsList = response.body();
 
                         ArrayList<String> goalNamesList = new ArrayList<>();
@@ -56,7 +59,9 @@ public class Home extends AppCompatActivity {
                             String goalName = goal.getGoalName();
                             goalNamesList.add(goalName);
                         }
-                        // print the goalNamesList to the console
+                        // print the goalNamesList to the toast
+                        Toast.makeText(mContext, goalNamesList.toString(), Toast.LENGTH_SHORT).show();
+
                         System.out.println(goalNamesList);
 
                         // Create an adapter to populate the ListView
