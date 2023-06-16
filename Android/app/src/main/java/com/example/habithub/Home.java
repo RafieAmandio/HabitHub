@@ -56,6 +56,9 @@ public class Home extends AppCompatActivity {
                             String goalName = goal.getGoalName();
                             goalNamesList.add(goalName);
                         }
+                        // print the goalNamesList to the console
+                        System.out.println(goalNamesList);
+
                         // Create an adapter to populate the ListView
                         ArrayAdapter<String> adapter = new ArrayAdapter<>(mContext, android.R.layout.simple_list_item_1, goalNamesList);
                         // Set the adapter to the ListView

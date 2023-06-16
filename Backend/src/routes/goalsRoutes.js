@@ -7,7 +7,7 @@ const router = express.Router();
 router.get('/', goalsController.getAllGoals);
 
 // Route to get all goals by userid
-router.get('/user/:userid', goalsController.getAllGoalsByUserId);
+router.get('/user', goalsController.getAllGoalsByUserId);
 
 // Route to get a goal by goalid
 router.get('/goalid/:goalid', goalsController.getGoalById);

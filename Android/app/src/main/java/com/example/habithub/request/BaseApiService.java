@@ -32,9 +32,10 @@ public interface BaseApiService {
             @Field("gender") String gender
     );
 
-    @GET("goals/user/{userid}")
+    @FormUrlEncoded
+    @GET("goals/user")
     Call<ArrayList<Goals>> getGoalsByUserId(
-            @Path("userid") String userid
+            @Field("userid") String userid
     );
 
 
