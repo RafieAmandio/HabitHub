@@ -1,6 +1,7 @@
 const {pool} = require('../config/config');
 const {v4: uuidv4} = require('uuid');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 // Controller function to create a new user
 const registerUser = async (req, res) => {
