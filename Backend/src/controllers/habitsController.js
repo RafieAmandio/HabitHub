@@ -14,8 +14,8 @@ const createHabit = async (req, res) => {
       console.log('goalId' + goalId);
       console.log('habitName' + habitName);
       console.log('startDate' + startDate);
-      console.log('daysOfWeek' + daysOfWeek);
-      console.log(!Array.isArray(daysOfWeek));
+      console.log('daysOfWeek' + parsedArray);
+      console.log(!Array.isArray(parsedArray));
       console.log('Missing required fields');
       return res.status(400).json({ error: 'Missing required fields' });
     }
@@ -64,12 +64,12 @@ const createHabit = async (req, res) => {
     await pool.query(habitInsertQuery);
 
     // Insert habit frequency for each day of the week
-    const frequencyInsertQueries = daysOfWeek.map((parsedArray) => ({
+    const frequencyInsertQueries = parsedArray.map((dayOfWeek) => ({
       text: `
         INSERT INTO HabitFrequency (habit_id, day_of_week)
         VALUES ($1, $2)
       `,
-      values: [habitId, parsedArray],
+      values: [habitId, dayOfWeek],
     }));
 
     await Promise.all(frequencyInsertQueries.map((query) => pool.query(query)));
