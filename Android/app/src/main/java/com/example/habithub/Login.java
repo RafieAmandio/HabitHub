@@ -1,14 +1,15 @@
 package com.example.habithub;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.habithub.model.LoginResponse;
 import com.example.habithub.model.User;
@@ -28,8 +29,14 @@ public class Login extends AppCompatActivity {
     TextView btnRegister;
     Context mContext;
 
-    public static User user;
+    private static final String SHARED_PREF_NAME = "Logged";
+    private static final String KEY_TOKEN = "token";
+    private static final String KEY_USER_ID = "user_id";
+    private static final String KEY_USERNAME = "username";
+    private static final String KEY_EMAIL = "email";
+    private static final String KEY_GENDER = "gender";
 
+    public static User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +70,13 @@ public class Login extends AppCompatActivity {
             startActivity(intent);
         });
 
-
-
+        // Check if the token and user data exist in SharedPreferences
+        String savedToken = getTokenFromSharedPreferences();
+        String savedUserId = getUserIdFromSharedPreferences();
+        if (savedToken != null && savedUserId != null) {
+            // Token and user data exist, proceed to the Home activity
+            navigateToHome();
+        }
     }
 
     private void login() {
@@ -80,11 +92,11 @@ public class Login extends AppCompatActivity {
                     // Handle successful login response
                     String token = loginResponse.getToken();
                     user = loginResponse.getUser();
-                    // Save the token or perform any required actions
+                    // Save the token and user data in SharedPreferences
+                    saveTokenToSharedPreferences(token);
+                    saveUserDataToSharedPreferences(user);
                     // Start the Home activity
-                    Intent intent = new Intent(mContext, Home.class);
-                    startActivity(intent);
-                    finish(); // Close the login activity
+                    navigateToHome();
                 } else {
                     // Handle unsuccessful login response
                     Toast.makeText(mContext, "Invalid credentials", Toast.LENGTH_SHORT).show();
@@ -98,5 +110,39 @@ public class Login extends AppCompatActivity {
                 t.printStackTrace(); // Print the stack trace for more detailed error information
             }
         });
+    }
+
+    private void saveTokenToSharedPreferences(String token) {
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(KEY_TOKEN, token);
+        editor.apply();
+    }
+
+    private String getTokenFromSharedPreferences() {
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_TOKEN, null);
+    }
+
+    private void saveUserDataToSharedPreferences(User user) {
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(KEY_USER_ID, user.getUserId());
+        editor.putString(KEY_USERNAME, user.getUsername());
+        editor.putString(KEY_EMAIL, user.getEmail());
+        editor.putString(KEY_GENDER, user.getGender());
+
+        editor.apply();
+    }
+
+    private String getUserIdFromSharedPreferences() {
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_USER_ID, null);
+    }
+
+    private void navigateToHome() {
+        Intent intent = new Intent(mContext, Home.class);
+        startActivity(intent);
+        finish(); // Close the login activity
     }
 }

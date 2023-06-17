@@ -14,7 +14,7 @@ router.post('/user',verifyToken, goalsController.getAllGoalsByUserId);
 router.get('/goalid/:goalid', goalsController.getGoalById);
 
 // Route to create a new goal
-router.post('/create', goalsController.createGoal);
+router.post('/create',verifyToken, goalsController.createGoal);
 
 // Route to update a goal by goalid
 router.put('/update/:goalid', goalsController.updateGoalById);

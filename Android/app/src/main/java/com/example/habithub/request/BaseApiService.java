@@ -11,6 +11,7 @@ import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -35,7 +36,18 @@ public interface BaseApiService {
     @FormUrlEncoded
     @POST("goals/user")
     Call<ArrayList<Goals>> getGoalsByUserId(
+            @Header("x-access-token") String token,
             @Field("userid") String userid
+    );
+
+    @FormUrlEncoded
+    @POST("goals/create")
+    Call<Goals> addGoals(
+            @Header("x-access-token") String token,
+            @Field("userid") String userid,
+            @Field("description") String description,
+            @Field("goalName") String category,
+            @Field("targetDate") String deadline
     );
 
 
