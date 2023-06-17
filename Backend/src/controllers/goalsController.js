@@ -41,7 +41,7 @@ const createGoal = async (req, res) => {
   try {
     // Extract the required fields from the request body
     const {description, goalName, targetDate, userId} = req.body;
-
+    console.log(req.body);
     // Perform data validation
     if (!description || !goalName || !targetDate || !userId) {
       return res.status(400).json({error: 'Missing required fields'});
