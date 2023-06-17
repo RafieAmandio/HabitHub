@@ -101,7 +101,8 @@ public class AddGoals extends AppCompatActivity {
         String description = goalDescription.getText().toString().trim();
         String goalNamee = goalName.getText().toString().trim();
         String targetDate = tgDate.getText().toString().trim();
-
+        //print the token in toast
+        Toast.makeText(mContext, "Token: " + token, Toast.LENGTH_SHORT).show();
         Call<Goals> call = mApiService.addGoals(token, userId, description, goalNamee, targetDate);
         call.enqueue(new Callback<Goals>() {
             @Override
@@ -112,7 +113,12 @@ public class AddGoals extends AppCompatActivity {
                     Toast.makeText(mContext, "Goal added successfully", Toast.LENGTH_SHORT).show();
                 } else {
                     // Handle unsuccessful addition of goals
-                    Toast.makeText(mContext, "Failed to add goal", Toast.LENGTH_SHORT).show();
+
+                    //print the response body
+                    Toast.makeText(mContext, "Failed to add goal: " + response.errorBody(), Toast.LENGTH_SHORT).show();
+
+
+
                 }
             }
 

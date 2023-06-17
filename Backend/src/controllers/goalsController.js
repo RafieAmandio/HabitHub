@@ -44,6 +44,7 @@ const createGoal = async (req, res) => {
     console.log(req.body);
     // Perform data validation
     if (!description || !goalName || !targetDate || !userId) {
+      console.log('Missing required fields');
       return res.status(400).json({error: 'Missing required fields'});
     }
 
@@ -53,10 +54,12 @@ const createGoal = async (req, res) => {
       typeof goalName !== 'string' ||
       typeof userId !== 'string'
     ) {
+      console.log('Invalid data types');
       return res.status(400).json({error: 'Invalid data types'});
     }
 
     if (!isValidDate(targetDate)) {
+      console.log('Invalid target date format');
       return res.status(400).json({error: 'Invalid target date format'});
     }
 
@@ -69,7 +72,7 @@ const createGoal = async (req, res) => {
     };
 
     const result = await pool.query(query);
-
+    console.log("Success " + result.rows[0]);
     res.status(201).json(result.rows[0]);
   } catch (error) {
     console.error('Error creating goal:', error);

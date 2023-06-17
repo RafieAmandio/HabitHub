@@ -46,8 +46,8 @@ public interface BaseApiService {
             @Header("x-access-token") String token,
             @Field("userid") String userid,
             @Field("description") String description,
-            @Field("goalName") String category,
-            @Field("targetDate") String deadline
+            @Field("goalName") String goalName,
+            @Field("targetDate") String targetDate
     );
 
 
