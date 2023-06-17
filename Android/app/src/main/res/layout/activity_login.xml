@@ -52,12 +52,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_imageview">
 
+
+
         <!--Edit Text Email-->
         <EditText
             android:id="@+id/login_editemail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="50dp"
             android:backgroundTint="@color/placeholder"
             android:fontFamily="@font/nunitosemibold"
             android:hint="Email"

@@ -5,19 +5,19 @@ const {v4: uuidv4} = require('uuid');
 
 const createHabit = async (req, res) => {
   try {
-    const {description, goalId, habitName, startDate} = req.body;
+    const { goalId, habitName, description, startDate, daysOfWeek } = req.body;
     const habitId = uuidv4();
 
     // Perform data validation
-    if (!description || !goalId || !habitName || !startDate) {
-      return res.status(400).json({error: 'Missing required fields'});
+    if (!goalId || !habitName || !startDate || !Array.isArray(daysOfWeek)) {
+      return res.status(400).json({ error: 'Missing required fields' });
     }
 
     if (!isValidDate(startDate)) {
-      return res.status(400).json({error: 'Invalid target date format'});
+      return res.status(400).json({ error: 'Invalid start date format' });
     }
 
-    // Check if the goal is exist
+    // Check if the goal exists
     const goalQuery = {
       text: `
         SELECT * FROM goals
@@ -28,7 +28,7 @@ const createHabit = async (req, res) => {
 
     const goalResult = await pool.query(goalQuery);
     if (goalResult.rows.length === 0) {
-      return res.status(404).json({error: 'User or Goal not found'});
+      return res.status(404).json({ error: 'Goal not found' });
     }
 
     // Check if habit already exists
@@ -42,26 +42,38 @@ const createHabit = async (req, res) => {
 
     const habitResult = await pool.query(habitQuery);
     if (habitResult.rows.length > 0) {
-      return res.status(409).json({error: 'Habit already exists'});
+      return res.status(409).json({ error: 'Habit already exists' });
     }
 
     // Create the habit
-    const query = {
+    const habitInsertQuery = {
       text: `
-        INSERT INTO habits (habitid, description, goalid, habitname, startdate) 
-        VALUES ($1, $2, $3, $4, $5) RETURNING *
+        INSERT INTO habits (habitid, goalid, habitname, description, startdate)
+        VALUES ($1, $2, $3, $4, $5)
       `,
-      values: [habitId, description, goalId, habitName, startDate],
+      values: [habitId, goalId, habitName, description, startDate],
     };
 
-    const result = await pool.query(query);
+    await pool.query(habitInsertQuery);
 
-    res.status(201).json(result.rows[0]);
+    // Insert habit frequency for each day of the week
+    const frequencyInsertQueries = daysOfWeek.map((dayOfWeek) => ({
+      text: `
+        INSERT INTO HabitFrequency (habit_id, day_of_week)
+        VALUES ($1, $2)
+      `,
+      values: [habitId, dayOfWeek],
+    }));
+
+    await Promise.all(frequencyInsertQueries.map((query) => pool.query(query)));
+
+    res.status(201).json({ message: 'Habit created successfully' });
   } catch (error) {
     console.error('Error creating habit:', error);
-    res.status(500).json({error: 'Failed to create habit'});
+    res.status(500).json({ error: 'Failed to create habit' });
   }
 };
+
 
 const getAllHabitsByUserId = async (req, res) => {
   try {

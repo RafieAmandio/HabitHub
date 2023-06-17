@@ -44,6 +44,10 @@ const createGoal = async (req, res) => {
     console.log(req.body);
     // Perform data validation
     if (!description || !goalName || !targetDate || !userId) {
+      //print whats missing
+      
+
+
       console.log('Missing required fields');
       return res.status(400).json({error: 'Missing required fields'});
     }

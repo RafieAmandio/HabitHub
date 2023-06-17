@@ -44,7 +44,7 @@ public interface BaseApiService {
     @POST("goals/create")
     Call<Goals> addGoals(
             @Header("x-access-token") String token,
-            @Field("userid") String userid,
+            @Field("userId") String userid,
             @Field("description") String description,
             @Field("goalName") String goalName,
             @Field("targetDate") String targetDate

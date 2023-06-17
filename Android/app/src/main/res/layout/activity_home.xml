@@ -56,9 +56,10 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:src="@drawable/notif_icon"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/main_profileimage"
-            app:layout_constraintTop_toTopOf="parent" />
+             />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
