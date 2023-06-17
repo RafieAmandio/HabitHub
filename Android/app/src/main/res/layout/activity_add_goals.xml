@@ -15,6 +15,7 @@
         android:padding="20dp">
 
         <ImageView
+            android:id="@+id/addgoals_btnback"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
@@ -154,11 +155,13 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/addgoals_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
+                        android:textColor="@color/black"
                         android:text="20/20/2023"
                         android:textSize="18dp"/>
 
@@ -180,7 +183,7 @@
             </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/createpayment_button"
+                android:id="@+id/addgoals_btncreate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_button"
