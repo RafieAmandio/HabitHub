@@ -7,9 +7,9 @@ const createHabit = async (req, res) => {
   try {
     const { goalId, habitName, description, startDate, daysOfWeek } = req.body;
     const habitId = uuidv4();
-
+    const parsedArray = JSON.parse(daysOfWeek);
     // Perform data validation
-    if (!goalId || !habitName || !startDate || !Array.isArray(daysOfWeek)) {
+    if (!goalId || !habitName || !startDate || !Array.isArray(parsedArray)) {
       //check all fields
       console.log('goalId' + goalId);
       console.log('habitName' + habitName);
@@ -64,12 +64,12 @@ const createHabit = async (req, res) => {
     await pool.query(habitInsertQuery);
 
     // Insert habit frequency for each day of the week
-    const frequencyInsertQueries = daysOfWeek.map((dayOfWeek) => ({
+    const frequencyInsertQueries = daysOfWeek.map((parsedArray) => ({
       text: `
         INSERT INTO HabitFrequency (habit_id, day_of_week)
         VALUES ($1, $2)
       `,
-      values: [habitId, dayOfWeek],
+      values: [habitId, parsedArray],
     }));
 
     await Promise.all(frequencyInsertQueries.map((query) => pool.query(query)));
