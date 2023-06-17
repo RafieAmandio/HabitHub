@@ -10,6 +10,13 @@ const createHabit = async (req, res) => {
 
     // Perform data validation
     if (!goalId || !habitName || !startDate || !Array.isArray(daysOfWeek)) {
+      //check all fields
+      console.log('goalId' + goalId);
+      console.log('habitName' + habitName);
+      console.log('startDate' + startDate);
+      console.log('daysOfWeek' + daysOfWeek);
+      console.log(!Array.isArray(daysOfWeek));
+      console.log('Missing required fields');
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
