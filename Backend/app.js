@@ -6,7 +6,7 @@ const usersRoutes = require('./src/routes/usersRoutes');
 const goalsRoutes = require('./src/routes/goalsRoutes');
 const habitRoutes = require('./src/routes/habitsRoutes');
 // const frequencyRoutes = require('./routes/frequencyRoutes');
-// const checklistRoutes = require('./src/routes/checklistRoutes');
+const checklistRoutes = require('./src/routes/checklistRoutes');
 // const progressRoutes = require('./routes/progressRoutes');
 // const pointRoutes = require('./routes/pointRoutes');
 
@@ -21,8 +21,7 @@ app.use(bodyParser.json());
 app.use('/users', usersRoutes);
 app.use('/goals', goalsRoutes);
 app.use('/habits', habitRoutes);
-// app.use('/frequencies', frequencyRoutes);
-// app.use('/checklists', checklistRoutes);
+app.use('/checklists', checklistRoutes);
 // app.use('/progress', progressRoutes);
 // app.use('/points', pointRoutes);
 

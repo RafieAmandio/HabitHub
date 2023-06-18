@@ -84,26 +84,33 @@ const createHabit = async (req, res) => {
 
 const getAllHabitsByUserId = async (req, res) => {
   try {
-    const {userId} = req.body;
+    const { userId } = req.body;
 
     const query = {
       text: `
-        SELECT habits.*, goals.goalname
+        SELECT habits.*, goals.goalname, 
+        CONCAT('[', STRING_AGG(habitfrequency.day_of_week::text, ','), ']') AS daysOfWeek
         FROM habits
         INNER JOIN goals ON habits.goalid = goals.goalid
+        INNER JOIN habitfrequency ON habits.habitid = habitfrequency.habit_id
         WHERE goals.userid = $1
+        GROUP BY habits.habitid, goals.goalname;
       `,
       values: [userId],
     };
 
     const result = await pool.query(query);
 
+    console.log(result.rows);
+
+
     res.json(result.rows);
   } catch (error) {
     console.error('Error fetching habits by user ID:', error);
-    res.status(500).json({error: 'Failed to fetch habits'});
+    res.status(500).json({ error: 'Failed to fetch habits' });
   }
 };
+
 
 const getAllHabitsByGoalId = async (req, res) => {
   try {

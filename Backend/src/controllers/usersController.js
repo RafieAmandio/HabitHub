@@ -147,10 +147,35 @@ const deleteUserById = async (req, res) => {
   }
 };
 
+const sumPointsByUserId = async (req, res) => {
+  try {
+    const { userId } = req.body;
+
+    const query = {
+      text: `
+        SELECT SUM(points) AS total_points
+        FROM habit_points
+        WHERE user_id = $1
+      `,
+      values: [userId],
+    };
+
+    const result = await pool.query(query);
+
+    const totalPoints = result.rows[0].total_points;
+
+    res.status(200).json({ points: totalPoints });
+  } catch (error) {
+    console.error('Error summing points:', error);
+    res.status(500).json({ error: 'Failed to sum points' });
+  }
+};
+
 module.exports = {
   registerUser,
   loginUser,
   getUserById,
   updateUserById,
   deleteUserById,
+  sumPointsByUserId
 };

@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const {authenticate} = require('../middleware/authMiddleware');
 
 const usersController = require('../controllers/usersController');
+const verifyToken = require('../middleware/authMiddleware');
 
 // Route to create a new user
 router.post('/register', usersController.registerUser);
@@ -18,5 +18,7 @@ router.put('/update/:id', usersController.updateUserById);
 
 // Route to delete user by ID
 router.delete('/delete/:id', usersController.deleteUserById);
+
+router.post('/checkpoint', verifyToken, usersController.sumPointsByUserId);
 
 module.exports = router;

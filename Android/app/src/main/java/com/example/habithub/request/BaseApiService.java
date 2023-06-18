@@ -7,6 +7,7 @@ import com.example.habithub.model.User;
 
 import java.util.ArrayList;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -62,6 +63,42 @@ public interface BaseApiService {
             @Field("daysOfWeek") String daysOfWeek
     );
 
+    @FormUrlEncoded
+    @POST("habits/getbyuser")
+    Call<ArrayList<Habit>> getHabitByUserId(
+            @Header("x-access-token") String token,
+            @Field("userId") String userid
+    );
+
+    @FormUrlEncoded
+    @POST("habits/getbygoal")
+    Call<ArrayList<Habit>> getHabitByGoalId(
+            @Header("x-access-token") String token,
+            @Field("goalId") String goalid
+    );
+
+    @FormUrlEncoded
+    @POST("checklists/checkin")
+    Call<Void> checkHabit(
+            @Header("x-access-token") String token,
+            @Field("userId") String userId,
+            @Field("habitId") String habitId
+    );
+
+    @FormUrlEncoded
+    @POST("users/checkpoint")
+    Call<ResponseBody> getPoints(
+            @Header("x-access-token") String token,
+            @Field("userId") String userId
+    );
+
+    @FormUrlEncoded
+    @POST("checklists/uncheck")
+    Call<Void> uncheckHabit(
+            @Header("x-access-token") String token,
+            @Field("userId") String userId,
+            @Field("habitId") String habitId
+    );
 
 
 }

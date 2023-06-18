@@ -58,6 +58,10 @@ public class addHabits extends AppCompatActivity {
         tgDate = (TextView) findViewById(R.id.addhabits_date);
         calendar = Calendar.getInstance();
 
+        btnBack.setOnClickListener(v -> {
+            Intent intent = new Intent(addHabits.this, Home.class);
+            startActivity(intent);
+        });
         //show date picker
         btnSelectDate.setOnClickListener(v -> {
             showDatePickerDialog();

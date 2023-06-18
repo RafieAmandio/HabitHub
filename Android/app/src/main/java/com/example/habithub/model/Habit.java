@@ -16,6 +16,9 @@ public class Habit {
     @SerializedName("startdate")
     private String startDate;
 
+    @SerializedName("daysofweek")
+    private String daysofweek;
+
     public UUID getHabitId() {
         return habitId;
     }
@@ -54,5 +57,22 @@ public class Habit {
 
     public void setStartDate(String startDate) {
         this.startDate = startDate;
+    }
+
+    public String getDaysOfWeek() {
+        return daysofweek;
+    }
+
+    //create to string
+    @Override
+    public String toString() {
+        return "Habit{" +
+                "habitId=" + habitId +
+                ", goalId=" + goalId +
+                ", habitName='" + habitName + '\'' +
+                ", description='" + description + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", daysofweek='" + daysofweek + '\'' +
+                '}';
     }
 }
