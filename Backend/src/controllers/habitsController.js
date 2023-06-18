@@ -107,7 +107,7 @@ const getAllHabitsByUserId = async (req, res) => {
 
 const getAllHabitsByGoalId = async (req, res) => {
   try {
-    const {goalId} = req.params;
+    const {goalId} = req.body;
 
     const query = {
       text: `
