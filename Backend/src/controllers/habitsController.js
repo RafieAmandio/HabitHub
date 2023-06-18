@@ -120,7 +120,12 @@ const getAllHabitsByGoalId = async (req, res) => {
 
     const result = await pool.query(query);
 
+    // send the result with status
     res.json(result.rows);
+
+    
+
+    
   } catch (error) {
     console.error('Error fetching habits by goal ID:', error);
     res.status(500).json({error: 'Failed to fetch habits'});
