@@ -108,12 +108,12 @@ const getAllHabitsByUserId = async (req, res) => {
 const getAllHabitsByGoalId = async (req, res) => {
   try {
     const {goalId} = req.body;
-
+    console.log('goalId' + goalId);
     const query = {
       text: `
-        SELECT habits.*
+        SELECT *
         FROM habits
-        WHERE goalid = $1
+        WHERE goalid = '$1'
       `,
       values: [goalId],
     };
