@@ -113,7 +113,7 @@ const getAllHabitsByGoalId = async (req, res) => {
       text: `
         SELECT habits.*
         FROM habits
-        WHERE habits.goalid = $1
+        WHERE goalid = $1
       `,
       values: [goalId],
     };
