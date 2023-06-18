@@ -91,7 +91,7 @@ const getAllHabitsByUserId = async (req, res) => {
         SELECT habits.*, goals.goalname
         FROM habits
         INNER JOIN goals ON habits.goalid = goals.goalid
-        WHERE habits.userid = $1
+        WHERE goals.userid = $1
       `,
       values: [userId],
     };
