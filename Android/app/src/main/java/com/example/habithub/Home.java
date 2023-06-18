@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -36,6 +37,9 @@ public class Home extends AppCompatActivity {
     private FloatingActionButton fab;
     private View option1;
     private View option2;
+
+    public static ArrayList<Goals> goalsList = new ArrayList<>();
+    public static String selectedGoalId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +91,9 @@ public class Home extends AppCompatActivity {
         option2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Redirect the user to the add goals activity
+                Intent intent = new Intent(mContext, addHabits.class);
+                startActivity(intent);
 
             }
         });
@@ -106,16 +113,19 @@ public class Home extends AppCompatActivity {
                         if (response.isSuccessful()) {
 
                             Toast.makeText(mContext, response.body().toString(), Toast.LENGTH_SHORT).show();
-                            ArrayList<Goals> goalsList = response.body();
+                            goalsList = response.body();
                             Log.d("Response", goalsList.toString());
 
 
                             ArrayList<String> goalNamesList = new ArrayList<>();
+                            ArrayList<String> goalIdsList = new ArrayList<>();
 
                             // Iterate through the goalsList and extract the goalName for each Goals object
                             for (Goals goal : goalsList) {
                                 String goalName = goal.getGoalName();
+                                String goalId = goal.getGoalId();
                                 goalNamesList.add(goalName);
+                                goalIdsList.add(goalId);
                             }
 
                             System.out.println(goalNamesList);
@@ -124,9 +134,29 @@ public class Home extends AppCompatActivity {
                             ArrayAdapter<String> adapter = new ArrayAdapter<>(mContext, android.R.layout.simple_list_item_1, goalNamesList);
                             // Set the adapter to the ListView
                             listView.setAdapter(adapter);
+
+                            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                    // Get the selected goalId
+                                    String selectedGoalIdd = goalIdsList.get(position);
+
+                                    // Store the selected goalId in a public static variable
+                                    selectedGoalId = selectedGoalIdd;
+
+                                    // Redirect to the AddHabits activity
+                                    Intent intent = new Intent(mContext, addHabits.class);
+                                    startActivity(intent);
+                                }
+                            });
                         } else {
                             // Handle API call failure
-                            Toast.makeText(mContext, "Error", Toast.LENGTH_SHORT).show();
+                            // if res status code is 401, logout
+                            if (response.code() == 401) {
+                                logout();
+                            }
+
+                            Toast.makeText(mContext, "Error" + response.errorBody().string(), Toast.LENGTH_SHORT).show();
                         }
                     } catch (Exception e) {
                         e.printStackTrace();

@@ -84,7 +84,7 @@ const createHabit = async (req, res) => {
 
 const getAllHabitsByUserId = async (req, res) => {
   try {
-    const {userId} = req.params;
+    const {userId} = req.body;
 
     const query = {
       text: `

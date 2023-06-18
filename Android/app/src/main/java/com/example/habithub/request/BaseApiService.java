@@ -1,6 +1,7 @@
 package com.example.habithub.request;
 
 import com.example.habithub.model.Goals;
+import com.example.habithub.model.Habit;
 import com.example.habithub.model.LoginResponse;
 import com.example.habithub.model.User;
 
@@ -48,6 +49,17 @@ public interface BaseApiService {
             @Field("description") String description,
             @Field("goalName") String goalName,
             @Field("targetDate") String targetDate
+    );
+
+    @FormUrlEncoded
+    @POST("habits/create")
+    Call<Habit> addHabit(
+            @Header("x-access-token") String token,
+            @Field("goalId") String goalid,
+            @Field("description") String description,
+            @Field("habitName") String habitName,
+            @Field("startDate") String startDate,
+            @Field("daysOfWeek") String daysOfWeek
     );
 
 

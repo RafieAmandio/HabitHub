@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
@@ -114,7 +115,10 @@ public class AddGoals extends AppCompatActivity {
                     Goals goals = response.body();
                     // Handle successful addition of goals
                     Toast.makeText(mContext, "Goal added successfully", Toast.LENGTH_SHORT).show();
-                    finish();
+                    // create intent to home
+                    Intent intent = new Intent(AddGoals.this, Home.class);
+                    startActivity(intent);
+
                 } else {
                     // Handle unsuccessful addition of goals
 
