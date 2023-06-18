@@ -14,7 +14,7 @@ router.post('/getbyuser',verifyToken, habitsController.getAllHabitsByUserId);
 // router.get('/getbyid/:habitId', habitsController.getHabitById);
 
 // Route to get all habits for a specific goal
-router.get('/getbygoal',verifyToken, habitsController.getAllHabitsByGoalId);
+router.post('/getbygoal',verifyToken, habitsController.getAllHabitsByGoalId);
 
 // Route to update a specific habit by ID
 router.put('/update/:habitId', habitsController.updateHabitById);
